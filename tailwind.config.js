@@ -1,8 +1,47 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  important: true,
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        space: ['"Space Grotesk"'],
+      },
+      colors: {
+        purple: "hsl(278, 68%, 11%)",
+      },
+      fontSize: {
+        sm: "0.65rem",
+        smm: "20px",
+        base: "14px",
+        xl: "1.25rem",
+      },
+      width: {
+        38: "148px",
+        42: "168px",
+        76: "300px",
+      },
+      spacing: {
+        58: "232px",
+        100: "400px",
+      },
+      placeholderOpacity: {
+        10: "0.1",
+        20: "0.2",
+        95: "0.95",
+      },
+    },
+    fontWeight: {
+      hairline: 100,
+      thin: 200,
+      light: 300,
+      normal: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
+      extrabold: 800,
+      black: 900,
+    },
   },
   plugins: [],
 };
