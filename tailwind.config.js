@@ -9,6 +9,7 @@ module.exports = {
       },
       colors: {
         purple: "hsl(278, 68%, 11%)",
+        red: "hsl(0, 100%, 66%)",
       },
       fontSize: {
         sm: "0.65rem",
@@ -17,11 +18,19 @@ module.exports = {
         xl: "1.25rem",
       },
       width: {
+        24: "75px",
+        26: "78px",
+        34: "122px",
         38: "148px",
         42: "168px",
         76: "300px",
       },
       spacing: {
+        15: "60px",
+        17: "72px",
+        35: "140px",
+        38: "152px",
+        55: "222px",
         58: "232px",
         100: "400px",
       },
