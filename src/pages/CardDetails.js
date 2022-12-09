@@ -5,6 +5,24 @@ import CardBackBg from "./../assets/images/bg-card-back.png";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 function CardDetails() {
+  const [card, setCard] = useState("");
+
+  const handleCardDisplay = () => {
+    const rawText = [...card.split(" ").join("")]; // Remove old space
+    const creditCard = []; // Create card as array
+    rawText.forEach((t, i) => {
+      if (i % 4 === 0) creditCard.push(" "); // Add space
+      creditCard.push(t);
+    });
+    return creditCard.join("").trimStart(); // Transform card array to string
+  };
+
+  const years = Array.from({ length: 22 }, (value, index) => index + 0);
+  const yearsStr = Array.from(years, (year) => year.toString());
+
+  const months = Array.from({ length: 12 }, (value, index) => index + 1);
+  const monthsStr = Array.from(months, (month) => month.toString());
+
   return (
     <>
       <div class="grid grid-cols-2 divide-x">
@@ -35,36 +53,50 @@ function CardDetails() {
                 cvc: "",
               }}
               validate={(values) => {
-                return !values.cardHolderName
-                  ? { cardHolderName: "Can't be blank" }
-                  : !/^[a-zA-Z\s]+$/gi.test(values.cardHolderName)
-                  ? { cardHolderName: "Invalid Cardholder Name" }
-                  : !values.cardNumber
-                  ? { cardNumber: "Can't be blank" }
-                  : !/^[0-9]+$/.test(values.cardNumber)
-                  ? { cardNumber: "Wrong format, numbers only" }
-                  : !values.expMonth
-                  ? { expMonth: "Can't be blank" }
-                  : !/^[0-9]+$/.test(values.expMonth)
-                  ? { expMonth: "Invalid Card Month" }
-                  : !values.expYear
-                  ? { expYear: "Can't be blank" }
-                  : !/^[0-9]+$/.test(values.expYear)
-                  ? { expYear: "Invalid Card Year" }
-                  : !values.cvc
-                  ? { cvc: "Can't be blank" }
-                  : !/^[0-9]+$/.test(values.cvc)
-                  ? { cvc: "Invalid Card CVC" }
-                  : !values.cardNumber;
+                const errors = {
+                  cardHolderName: !values.cardHolderName
+                    ? "Can't be blank"
+                    : !/^[a-zA-Z\s]+$/gi.test(values.cardHolderName)
+                    ? "Invalid Cardholder Name"
+                    : null,
+                  cardNumber: !values.cardNumber
+                    ? "Can't be blank"
+                    : !/^[0-9\s]+$/.test(values.cardNumber)
+                    ? "Wrong format, numbers only"
+                    : null,
+                  expMonth: !values.expMonth
+                    ? "Can't be blank"
+                    : !/^[0-9]+$/.test(values.expMonth)
+                    ? "Wrong format"
+                    : !monthsStr.includes(values.expMonth)
+                    ? "Invalid Month"
+                    : null,
+                  expYear: !values.expYear
+                    ? "Can't be blank"
+                    : !/^[0-9]+$/.test(values.expYear)
+                    ? "Wrong format"
+                    : yearsStr.includes(values.expYear)
+                    ? "Invalid Year"
+                    : null,
+                  cvc: !values.cvc
+                    ? "Can't be blank"
+                    : !/^[0-9]+$/.test(values.cvc)
+                    ? "Wrong format"
+                    : null,
+                };
+
+                return Object.values(errors).some((error) => error)
+                  ? errors
+                  : {};
               }}
-              onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
-                }, 400);
-              }}
+              // onSubmit={(values, { setSubmitting }) => {
+              //   setTimeout(() => {
+              //     alert(JSON.stringify(values, null, 2));
+              //     setSubmitting(false);
+              //   }, 400);
+              // }}
             >
-              {({ isSubmitting, values }) => (
+              {({ isSubmitting, values, handleChange }) => (
                 <Form>
                   <div class="mb-6">
                     <label class="block mb-1.5 font-space text-purple font-semibold text-sm tracking-widest">
@@ -87,10 +119,16 @@ function CardDetails() {
                       CARD NUMBER
                     </label>
                     <Field
+                      validateOnChange={true}
+                      value={handleCardDisplay()}
+                      onChange={(e) => {
+                        setCard(e.target.value);
+                        handleChange(e);
+                      }}
                       type="cardNumber"
                       name="cardNumber"
-                      minLength={16}
-                      maxLength={16}
+                      minLength={19}
+                      maxLength={19}
                       placeholder="e.g. 1234 5678 9123 0000"
                       class="border rounded-md border-purple-50 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-76"
                     />
@@ -126,7 +164,7 @@ function CardDetails() {
                       class="border rounded-md border-purple-50 ml-2 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-16"
                     />
                     <ErrorMessage
-                      class="absolute w-38 left-17 top-55  text-sm text-red font-space"
+                      class="absolute w-38 left-18 top-55  text-sm text-red font-space"
                       name="expYear"
                       component="div"
                     />
