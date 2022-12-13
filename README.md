@@ -2,7 +2,7 @@
 
 ## 1. Description
 
-The reason I built this applciation was to practice my front end skills with React and Forms. As a user, you can fill in the form and see the card details update in real-time. A user should also recieve error messages when the form is submitted if any input field is empty and if the card number/expiry date/CVC fields are in the wrong format. The web page should also display the optimal layout depending on the user's device screen size. Lastly, the user can see hover, active, and focus states for interactive elements on the page.
+The Interactive Card Details Form is a web application that allows users to fill out a form and see the card details update in real-time. The application was built to practice front-end skills with React and forms. When the form is submitted, the user will receive error messages if any input fields are empty or if the card number/expiry date/CVC fields are in the wrong format. The web page will also display the optimal layout depending on the user's device screen size. Additionally, users can see hover, active, and focus states for interactive elements on the page.
 
 ## 2. How to Install and Run the Project
 
