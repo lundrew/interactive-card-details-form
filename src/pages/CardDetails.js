@@ -1,10 +1,30 @@
-import React from "react";
+import { React, useState } from "react";
 import MainBg from "./../assets/images/bg-main-desktop.png";
 import CardFrontBg from "./../assets/images/bg-card-front.png";
 import CardBackBg from "./../assets/images/bg-card-back.png";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 function CardDetails() {
+  const [card, setCard] = useState("");
+
+  const handleCardDisplay = () => {
+    const rawText = [...card.split(" ").join("")];
+    const creditCard = [];
+    rawText.forEach((t, i) => {
+      if (i % 4 === 0) creditCard.push(" ");
+      creditCard.push(t);
+    });
+    return creditCard.join("").trimStart();
+  };
+
+  const years = Array.from({ length: 22 }, (value, index) => index + 0);
+  const yearsStr = Array.from(years, (year) => year.toString());
+
+  const months = Array.from({ length: 12 }, (value, index) => index + 1);
+  const monthsStr = Array.from(months, (month) =>
+    month.toString().padStart(2, "0")
+  );
+
   return (
     <>
       <div class="grid grid-cols-2 divide-x">
@@ -34,33 +54,101 @@ function CardDetails() {
                 expYear: "",
                 cvc: "",
               }}
+              validate={(values) => {
+                const errors = {
+                  cardHolderName: !values.cardHolderName
+                    ? "Can't be blank"
+                    : !/^[a-zA-Z\s]+$/gi.test(values.cardHolderName)
+                    ? "Invalid Cardholder Name"
+                    : null,
+                  cardNumber: !values.cardNumber
+                    ? "Can't be blank"
+                    : !/^[0-9\s]+$/.test(values.cardNumber)
+                    ? "Wrong format, numbers only"
+                    : null,
+                  expMonth: !values.expMonth
+                    ? "Can't be blank"
+                    : !/^[0-9]+$/.test(values.expMonth)
+                    ? "Wrong format"
+                    : !monthsStr.includes(values.expMonth)
+                    ? "Invalid Month"
+                    : null,
+                  expYear: !values.expYear
+                    ? "Can't be blank"
+                    : !/^[0-9]+$/.test(values.expYear)
+                    ? "Wrong format"
+                    : yearsStr.includes(values.expYear)
+                    ? "Invalid Year"
+                    : null,
+                  cvc: !values.cvc
+                    ? "Can't be blank"
+                    : !/^[0-9]+$/.test(values.cvc)
+                    ? "Wrong format"
+                    : null,
+                };
+
+                return Object.values(errors).some((error) => error)
+                  ? errors
+                  : {};
+              }}
+              onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                  alert(JSON.stringify(values, null, 2));
+                  setSubmitting(false);
+                }, 400);
+              }}
             >
-              {({ isSubmitting }) => (
+              {({ isSubmitting, handleChange, errors, touched }) => (
                 <Form>
                   <div class="mb-6">
                     <label class="block mb-1.5 font-space text-purple font-semibold text-sm tracking-widest">
                       CARDHOLDER NAME
                     </label>
                     <Field
-                      required
                       type="cardHolderName"
                       name="cardHolderName"
                       placeholder="e.g. Jane Appleseed"
-                      class="border rounded-md border-black-50 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-76"
+                      class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-76"
+                      style={{
+                        borderColor:
+                          errors.cardHolderName && touched.cardHolderName
+                            ? "red"
+                            : "",
+                      }}
                     />
-                    <ErrorMessage name="cardHolderName" component="div" />
+                    <ErrorMessage
+                      class="absolute w-34 top-15 text-sm text-red font-space"
+                      name="cardHolderName"
+                      component="div"
+                    />
                   </div>
                   <div class="mb-6">
                     <label class="block mb-1.5 font-space text-purple font-semibold text-sm tracking-widest">
                       CARD NUMBER
                     </label>
                     <Field
+                      validateOnChange={true}
+                      value={handleCardDisplay()}
+                      onChange={(e) => {
+                        setCard(e.target.value);
+                        handleChange(e);
+                      }}
                       type="cardNumber"
                       name="cardNumber"
+                      minLength={19}
+                      maxLength={19}
                       placeholder="e.g. 1234 5678 9123 0000"
-                      class="border rounded-md border-black-50 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-76"
+                      class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-76"
+                      style={{
+                        borderColor:
+                          errors.cardNumber && touched.cardNumber ? "red" : "",
+                      }}
                     />
-                    <ErrorMessage name="cardNumber" component="div" />
+                    <ErrorMessage
+                      class="absolute w-38 top-35  text-sm text-red font-space"
+                      name="cardNumber"
+                      component="div"
+                    />
                   </div>
                   <div class="mb-8">
                     <label class="block h-0 font-space text-purple font-semibold text-sm tracking-widest">
@@ -69,17 +157,37 @@ function CardDetails() {
                     <Field
                       type="expMonth"
                       name="expMonth"
+                      minLength={2}
+                      maxLength={2}
                       placeholder="MM"
-                      class="border rounded-md border-black-50 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-16"
+                      class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-16"
+                      style={{
+                        borderColor:
+                          errors.expMonth && touched.expMonth ? "red" : "",
+                      }}
                     />
-                    <ErrorMessage name="expMonth" component="div" />
+                    <ErrorMessage
+                      class="absolute w-38 left-0 top-55  text-sm text-red font-space"
+                      name="expMonth"
+                      component="div"
+                    />
                     <Field
                       type="expYear"
                       name="expYear"
+                      minLength={2}
+                      maxLength={2}
                       placeholder="YY"
-                      class="border rounded-md border-black-50 ml-2 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-16"
+                      class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 ml-2 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-16"
+                      style={{
+                        borderColor:
+                          errors.expYear && touched.expYear ? "red" : "",
+                      }}
                     />
-                    <ErrorMessage name="expYear" component="div" />
+                    <ErrorMessage
+                      class="absolute w-38 left-18 top-55  text-sm text-red font-space"
+                      name="expYear"
+                      component="div"
+                    />
                     <div class="inline-block pl-4">
                       <label class="block mb-1.5 font-space text-purple font-semibold text-sm tracking-widest">
                         CVC
@@ -87,15 +195,24 @@ function CardDetails() {
                       <Field
                         type="cvc"
                         name="cvc"
+                        minLength={3}
+                        maxLength={3}
                         placeholder="e.g. 123"
-                        class="border rounded-md border-black-50 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-38"
+                        class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 font-space text-black p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-38"
+                        style={{
+                          borderColor: errors.cvc && touched.cvc ? "red" : "",
+                        }}
                       />
-                      <ErrorMessage name="cvc" component="div" />
+                      <ErrorMessage
+                        class="absolute w-38 left-38 top-55 text-sm text-red font-space"
+                        name="cvc"
+                        component="div"
+                      />
                     </div>
                   </div>
                   <button
                     type="submit"
-                    class="bg-purple font-space font-thin text-base text-white w-76 h-10 py-2 px-4 rounded-md"
+                    class="bg-darkerViolet font-space font-thin text-base text-white w-76 h-10 py-2 px-4 rounded-md"
                     disabled={isSubmitting}
                   >
                     Confirm
