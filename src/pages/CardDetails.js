@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import MainBg from "./../assets/images/bg-main-desktop.png";
 import CardFrontBg from "./../assets/images/bg-card-front.png";
 import CardBackBg from "./../assets/images/bg-card-back.png";
@@ -8,20 +8,22 @@ function CardDetails() {
   const [card, setCard] = useState("");
 
   const handleCardDisplay = () => {
-    const rawText = [...card.split(" ").join("")]; // Remove old space
-    const creditCard = []; // Create card as array
+    const rawText = [...card.split(" ").join("")];
+    const creditCard = [];
     rawText.forEach((t, i) => {
-      if (i % 4 === 0) creditCard.push(" "); // Add space
+      if (i % 4 === 0) creditCard.push(" ");
       creditCard.push(t);
     });
-    return creditCard.join("").trimStart(); // Transform card array to string
+    return creditCard.join("").trimStart();
   };
 
   const years = Array.from({ length: 22 }, (value, index) => index + 0);
   const yearsStr = Array.from(years, (year) => year.toString());
 
   const months = Array.from({ length: 12 }, (value, index) => index + 1);
-  const monthsStr = Array.from(months, (month) => month.toString());
+  const monthsStr = Array.from(months, (month) =>
+    month.toString().padStart(2, "0")
+  );
 
   return (
     <>
@@ -89,14 +91,14 @@ function CardDetails() {
                   ? errors
                   : {};
               }}
-              // onSubmit={(values, { setSubmitting }) => {
-              //   setTimeout(() => {
-              //     alert(JSON.stringify(values, null, 2));
-              //     setSubmitting(false);
-              //   }, 400);
-              // }}
+              onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                  alert(JSON.stringify(values, null, 2));
+                  setSubmitting(false);
+                }, 400);
+              }}
             >
-              {({ isSubmitting, values, handleChange }) => (
+              {({ isSubmitting, handleChange, errors, touched }) => (
                 <Form>
                   <div class="mb-6">
                     <label class="block mb-1.5 font-space text-purple font-semibold text-sm tracking-widest">
@@ -106,7 +108,13 @@ function CardDetails() {
                       type="cardHolderName"
                       name="cardHolderName"
                       placeholder="e.g. Jane Appleseed"
-                      class="border rounded-md border-purple-50 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-76"
+                      class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-76"
+                      style={{
+                        borderColor:
+                          errors.cardHolderName && touched.cardHolderName
+                            ? "red"
+                            : "",
+                      }}
                     />
                     <ErrorMessage
                       class="absolute w-34 top-15 text-sm text-red font-space"
@@ -130,7 +138,11 @@ function CardDetails() {
                       minLength={19}
                       maxLength={19}
                       placeholder="e.g. 1234 5678 9123 0000"
-                      class="border rounded-md border-purple-50 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-76"
+                      class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-76"
+                      style={{
+                        borderColor:
+                          errors.cardNumber && touched.cardNumber ? "red" : "",
+                      }}
                     />
                     <ErrorMessage
                       class="absolute w-38 top-35  text-sm text-red font-space"
@@ -148,7 +160,11 @@ function CardDetails() {
                       minLength={2}
                       maxLength={2}
                       placeholder="MM"
-                      class="border rounded-md border-purple-50 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-16"
+                      class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-16"
+                      style={{
+                        borderColor:
+                          errors.expMonth && touched.expMonth ? "red" : "",
+                      }}
                     />
                     <ErrorMessage
                       class="absolute w-38 left-0 top-55  text-sm text-red font-space"
@@ -161,7 +177,11 @@ function CardDetails() {
                       minLength={2}
                       maxLength={2}
                       placeholder="YY"
-                      class="border rounded-md border-purple-50 ml-2 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-16"
+                      class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 ml-2 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-16"
+                      style={{
+                        borderColor:
+                          errors.expYear && touched.expYear ? "red" : "",
+                      }}
                     />
                     <ErrorMessage
                       class="absolute w-38 left-18 top-55  text-sm text-red font-space"
@@ -178,8 +198,10 @@ function CardDetails() {
                         minLength={3}
                         maxLength={3}
                         placeholder="e.g. 123"
-                        class="border rounded-md border-purple-50 font-space text-purple p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-38"
-                        errorClass="border rounded-md border-red-50"
+                        class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 font-space text-black p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-38"
+                        style={{
+                          borderColor: errors.cvc && touched.cvc ? "red" : "",
+                        }}
                       />
                       <ErrorMessage
                         class="absolute w-38 left-38 top-55 text-sm text-red font-space"
@@ -190,7 +212,7 @@ function CardDetails() {
                   </div>
                   <button
                     type="submit"
-                    class="bg-purple font-space font-thin text-base text-white w-76 h-10 py-2 px-4 rounded-md"
+                    class="bg-darkerViolet font-space font-thin text-base text-white w-76 h-10 py-2 px-4 rounded-md"
                     disabled={isSubmitting}
                   >
                     Confirm

@@ -1,14 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  important: true,
   theme: {
     extend: {
       fontFamily: {
         space: ['"Space Grotesk"'],
       },
       colors: {
-        purple: "hsl(278, 68%, 11%)",
+        activeColor1: "hsl(249, 99%, 64%)",
+        activeColor2: "hsl(278, 94%, 30%)",
+        lightViolet: "hsl(270, 3%, 87%)",
+        darkViolet: "hsl(279, 6%, 55%)",
+        darkerViolet: "hsl(278, 68%, 11%)",
         red: "hsl(0, 100%, 66%)",
       },
       fontSize: {
