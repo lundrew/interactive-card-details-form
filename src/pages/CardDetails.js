@@ -10,6 +10,7 @@ function CardDetails() {
   const [cardName, setCardName] = useState("");
   const [cardMonth, setCardMonth] = useState("");
   const [cardYear, setCardYear] = useState("");
+  const [cardCVC, setCardCVC] = useState("");
 
   const handleCardDisplay = () => {
     const rawText = [...cardNumber.split(" ").join("")];
@@ -60,11 +61,16 @@ function CardDetails() {
               /
             </div>
           </div>
-          <img
-            src={CardBackBg}
-            width={380}
-            class="z-10 absolute top-96 left-72 drop-shadow-2xl"
-          />
+          <div>
+            <img
+              src={CardBackBg}
+              width={380}
+              class="z-10 absolute top-96 left-72 drop-shadow-2xl"
+            />
+            <div class="z-10 absolute top-120 left-144 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+              {cardCVC}
+            </div>
+          </div>
           <div>
             <img src={MainBg} class="h-screen w-1/3 absolute z-0" />
           </div>
@@ -238,6 +244,10 @@ function CardDetails() {
                         class="border rounded-md border-gray-200 focus:border-activeColor1 outline-0 font-space text-black p-1.5 pl-3 font-medium text-base placeholder-gray-500 placeholder-opacity-40 w-38"
                         style={{
                           borderColor: errors.cvc && touched.cvc ? "red" : "",
+                        }}
+                        onChange={(e) => {
+                          setCardCVC(e.target.value);
+                          handleChange(e);
                         }}
                       />
                       <ErrorMessage
