@@ -2,13 +2,17 @@ import { React, useState } from "react";
 import MainBg from "./../assets/images/bg-main-desktop.png";
 import CardFrontBg from "./../assets/images/bg-card-front.png";
 import CardBackBg from "./../assets/images/bg-card-back.png";
+import CardLogo from "./../assets/images/card-logo.svg";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 function CardDetails() {
-  const [card, setCard] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardName, setCardName] = useState("");
+  const [cardMonth, setCardMonth] = useState("");
+  const [cardYear, setCardYear] = useState("");
 
   const handleCardDisplay = () => {
-    const rawText = [...card.split(" ").join("")];
+    const rawText = [...cardNumber.split(" ").join("")];
     const creditCard = [];
     rawText.forEach((t, i) => {
       if (i % 4 === 0) creditCard.push(" ");
@@ -29,11 +33,33 @@ function CardDetails() {
     <>
       <div class="grid grid-cols-2 divide-x">
         <div>
-          <img
-            src={CardFrontBg}
-            width={380}
-            class="z-10 absolute top-36 left-52 drop-shadow-2xl"
-          />
+          <div>
+            <img
+              src={CardFrontBg}
+              width={380}
+              class="z-10 absolute top-36 left-52 drop-shadow-2xl"
+            />
+            <img
+              src={CardLogo}
+              width={80}
+              class="z-10 absolute top-42 left-58 drop-shadow-2xl"
+            />
+            <div class="z-10 absolute top-66 left-58 bg-transparent text-white font-space text-xxl tracking-widest">
+              {cardNumber}
+            </div>
+            <div class="z-10 absolute top-84 left-58 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+              {cardName}
+            </div>
+            <div class="z-10 absolute top-84 left-130 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+              {cardMonth}
+            </div>
+            <div class="z-10 absolute top-84 left-132 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+              {cardYear}
+            </div>
+            <div class="z-10 absolute top-84 left-131 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+              /
+            </div>
+          </div>
           <img
             src={CardBackBg}
             width={380}
@@ -43,7 +69,6 @@ function CardDetails() {
             <img src={MainBg} class="h-screen w-1/3 absolute z-0" />
           </div>
         </div>
-
         <div class="border-none absolute top-58 right-80">
           <div>
             <Formik
@@ -115,6 +140,10 @@ function CardDetails() {
                             ? "red"
                             : "",
                       }}
+                      onChange={(e) => {
+                        setCardName(e.target.value);
+                        handleChange(e);
+                      }}
                     />
                     <ErrorMessage
                       class="absolute w-34 top-15 text-sm text-red font-space"
@@ -127,12 +156,6 @@ function CardDetails() {
                       CARD NUMBER
                     </label>
                     <Field
-                      validateOnChange={true}
-                      value={handleCardDisplay()}
-                      onChange={(e) => {
-                        setCard(e.target.value);
-                        handleChange(e);
-                      }}
                       type="cardNumber"
                       name="cardNumber"
                       minLength={19}
@@ -142,6 +165,12 @@ function CardDetails() {
                       style={{
                         borderColor:
                           errors.cardNumber && touched.cardNumber ? "red" : "",
+                      }}
+                      validateOnChange={true}
+                      value={handleCardDisplay()}
+                      onChange={(e) => {
+                        setCardNumber(e.target.value);
+                        handleChange(e);
                       }}
                     />
                     <ErrorMessage
@@ -165,6 +194,10 @@ function CardDetails() {
                         borderColor:
                           errors.expMonth && touched.expMonth ? "red" : "",
                       }}
+                      onChange={(e) => {
+                        setCardMonth(e.target.value);
+                        handleChange(e);
+                      }}
                     />
                     <ErrorMessage
                       class="absolute w-38 left-0 top-55  text-sm text-red font-space"
@@ -181,6 +214,10 @@ function CardDetails() {
                       style={{
                         borderColor:
                           errors.expYear && touched.expYear ? "red" : "",
+                      }}
+                      onChange={(e) => {
+                        setCardYear(e.target.value);
+                        handleChange(e);
                       }}
                     />
                     <ErrorMessage
@@ -212,7 +249,7 @@ function CardDetails() {
                   </div>
                   <button
                     type="submit"
-                    class="bg-darkerViolet font-space font-thin text-base text-white w-76 h-10 py-2 px-4 rounded-md"
+                    class="!bg-darkerViolet font-space font-thin text-base text-white w-76 h-10 py-2 px-4 rounded-md"
                     disabled={isSubmitting}
                   >
                     Confirm
