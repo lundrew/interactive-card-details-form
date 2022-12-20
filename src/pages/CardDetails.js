@@ -39,39 +39,39 @@ function CardDetails() {
           <div>
             <img
               src={CardFrontBg}
-              className="z-20 drop-shadow-2xl w-72 absolute top-38 left-6 md:w-32 lg:w-100 lg:absolute lg:top-36 lg:left-52"
+              className="z-20 drop-shadow-2xl w-72 absolute top-30 left-6 md:w-32 lg:w-100 lg:absolute lg:top-36 lg:left-52"
             />
             <img
               src={CardLogo}
-              className="z-20 drop-shadow-2xl w-16 absolute top-44 left-12 lg:top-42 lg:left-58"
+              className="z-20 drop-shadow-2xl w-14 absolute top-44 left-12 lg:w-27 lg:top-42 lg:left-58"
             />
-            <div className="z-20 absolute top-66 left-58 bg-transparent text-white font-space text-xxl tracking-widest">
+            <div className="z-20 absolute top-60 left-12 bg-transparent text-white font-space text-x tracking-widest lg:top-66 lg:left-58 lg:text-xxl">
               {cardNumber}
             </div>
-            <div className="z-20 absolute top-84 left-58 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+            <div className="z-20 absolute top-73 left-12 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-58 lg:text-smm">
               {cardName}
             </div>
-            <div className="z-20 absolute top-84 left-130 bg-transparent uppercase text-white font-space text-smm tracking-widest">
-              {cardMonth}
+            <div className="z-20 absolute top-73 left-62 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-130 lg:text-smm">
+              {cardMonth}/
             </div>
-            <div className="z-20 absolute top-84 left-132 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+            <div className="z-20 absolute top-73 left-70 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-132 lg:text-smm">
               {cardYear}
-            </div>
-            <div className="z-20 absolute top-84 left-131 bg-transparent uppercase text-white font-space text-smm tracking-widest">
-              /
             </div>
           </div>
           <div>
             <img
               src={CardBackBg}
-              className="z-10 drop-shadow-2xl w-72 absolute top-12 left-24 md:w-32 lg:w-100 lg:absolute lg:top-96 lg:left-72"
+              className="z-10 drop-shadow-2xl w-72 absolute top-8 left-20 md:w-32 lg:w-100 lg:absolute lg:top-96 lg:left-72"
             />
-            <div className="z-20 absolute top-29 left-85 bg-transparent uppercase text-white font-space text-sm tracking-widest md:w-32 lg:top-122 lg:left-144 lg:text-smm">
+            <div className="z-20 absolute top-26 left-84 bg-transparent uppercase text-white font-space text-s tracking-widest md:w-32 lg:top-122 lg:left-144 lg:text-smm">
               {cardCVC}
             </div>
           </div>
           <div>
-            <img src={MainBg} className="h-screen w-1/3 absolute z-0" />
+            <img
+              src={MainBg}
+              className="w-104 h-70 absolute z-0 lg:h-screen lg:w-1/3"
+            />
           </div>
         </div>
         {showDiv ? (
@@ -80,11 +80,11 @@ function CardDetails() {
               <img
                 src={IconComplete}
                 width={80}
-                className="absolute top-58 left-215"
+                className="absolute top-92 left-40 lg:top-58 lg:left-215"
               />
             </div>
             <div>
-              <h1 className="uppercase font-medium font-space text-xxl tracking-widest absolute top-88 left-200">
+              <h1 className="uppercase font-medium font-space text-xxl tracking-widest absolute top-120 left-29 lg:top-88 ;lg:left-200">
                 Thank you!
               </h1>
             </div>
@@ -103,7 +103,7 @@ function CardDetails() {
             </div>
           </div>
         ) : (
-          <div className="border-none absolute top-90 left:58 lg:top-58 lg:right-80">
+          <div className="border-none absolute top-90 left-10 lg:top-58 lg:left-185">
             <div>
               <Formik
                 initialValues={{
