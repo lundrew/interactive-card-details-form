@@ -39,37 +39,34 @@ function CardDetails() {
           <div>
             <img
               src={CardFrontBg}
-              width={380}
-              className="z-10 absolute top-36 left-52 drop-shadow-2xl"
+              className="z-20 drop-shadow-2xl w-72 absolute top-38 left-6 md:w-32 lg:w-100 lg:absolute lg:top-36 lg:left-52"
             />
             <img
               src={CardLogo}
-              width={80}
-              className="z-10 absolute top-42 left-58 drop-shadow-2xl"
+              className="z-20 drop-shadow-2xl w-16 absolute top-44 left-12 lg:top-42 lg:left-58"
             />
-            <div className="z-10 absolute top-66 left-58 bg-transparent text-white font-space text-xxl tracking-widest">
+            <div className="z-20 absolute top-66 left-58 bg-transparent text-white font-space text-xxl tracking-widest">
               {cardNumber}
             </div>
-            <div className="z-10 absolute top-84 left-58 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+            <div className="z-20 absolute top-84 left-58 bg-transparent uppercase text-white font-space text-smm tracking-widest">
               {cardName}
             </div>
-            <div className="z-10 absolute top-84 left-130 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+            <div className="z-20 absolute top-84 left-130 bg-transparent uppercase text-white font-space text-smm tracking-widest">
               {cardMonth}
             </div>
-            <div className="z-10 absolute top-84 left-132 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+            <div className="z-20 absolute top-84 left-132 bg-transparent uppercase text-white font-space text-smm tracking-widest">
               {cardYear}
             </div>
-            <div className="z-10 absolute top-84 left-131 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+            <div className="z-20 absolute top-84 left-131 bg-transparent uppercase text-white font-space text-smm tracking-widest">
               /
             </div>
           </div>
           <div>
             <img
               src={CardBackBg}
-              width={380}
-              className="z-10 absolute top-96 left-72 drop-shadow-2xl"
+              className="z-10 drop-shadow-2xl w-72 absolute top-12 left-24 md:w-32 lg:w-100 lg:absolute lg:top-96 lg:left-72"
             />
-            <div className="z-10 absolute top-120 left-144 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+            <div className="z-20 absolute top-29 left-85 bg-transparent uppercase text-white font-space text-sm tracking-widest md:w-32 lg:top-122 lg:left-144 lg:text-smm">
               {cardCVC}
             </div>
           </div>
@@ -106,7 +103,7 @@ function CardDetails() {
             </div>
           </div>
         ) : (
-          <div className="border-none absolute top-58 right-80">
+          <div className="border-none absolute top-90 left:58 lg:top-58 lg:right-80">
             <div>
               <Formik
                 initialValues={{
