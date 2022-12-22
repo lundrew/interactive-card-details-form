@@ -39,31 +39,31 @@ function CardDetails() {
           <div>
             <img
               src={CardFrontBg}
-              className="z-20 drop-shadow-2xl w-72 absolute top-30 left-6 md:w-32 lg:w-100 lg:absolute lg:top-36 lg:left-52"
+              className="z-20 drop-shadow-2xl w-72 absolute top-30 left-6 lg:w-100 lg:absolute lg:top-36 lg:left-52"
             />
             <img
               src={CardLogo}
-              className="z-20 drop-shadow-2xl w-14 absolute top-44 left-12 lg:w-27 lg:top-42 lg:left-58"
+              className="z-20 drop-shadow-2xl w-14 absolute top-35 left-12 lg:w-27 lg:top-42 lg:left-58"
             />
-            <div className="z-20 absolute top-60 left-12 bg-transparent text-white font-space text-x tracking-widest lg:top-66 lg:left-58 lg:text-xxl">
+            <div className="z-20 absolute top-46 left-12 bg-transparent text-white font-space text-x tracking-widest lg:top-66 lg:left-58 lg:text-xxl">
               {cardNumber}
             </div>
-            <div className="z-20 absolute top-73 left-12 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-58 lg:text-smm">
+            <div className="z-20 absolute top-62 left-12 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-58 lg:text-smm">
               {cardName}
             </div>
-            <div className="z-20 absolute top-73 left-62 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-130 lg:text-smm">
+            <div className="z-20 absolute top-62 left-62 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-130 lg:text-smm">
               {cardMonth}/
             </div>
-            <div className="z-20 absolute top-73 left-70 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-132 lg:text-smm">
+            <div className="z-20 absolute top-62 left-70 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-132 lg:text-smm">
               {cardYear}
             </div>
           </div>
           <div>
             <img
               src={CardBackBg}
-              className="z-10 drop-shadow-2xl w-72 absolute top-8 left-20 md:w-32 lg:w-100 lg:absolute lg:top-96 lg:left-72"
+              className="z-10 drop-shadow-2xl w-72 absolute top-8 left-20 lg:w-100 lg:absolute lg:top-96 lg:left-72"
             />
-            <div className="z-20 absolute top-26 left-84 bg-transparent uppercase text-white font-space text-s tracking-widest md:w-32 lg:top-122 lg:left-144 lg:text-smm">
+            <div className="z-20 absolute top-26 left-84 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-122 lg:left-144 lg:text-smm">
               {cardCVC}
             </div>
           </div>
@@ -84,19 +84,19 @@ function CardDetails() {
               />
             </div>
             <div>
-              <h1 className="uppercase font-medium font-space text-xxl tracking-widest absolute top-120 left-29 lg:top-88 ;lg:left-200">
+              <h1 className="uppercase font-medium font-space text-xxl tracking-widest absolute top-120 left-29 lg:top-88 lg:left-200">
                 Thank you!
               </h1>
             </div>
             <div>
-              <h1 className="text-darkViolet font-medium font-space text-smm tracking-widest absolute top-96 left-190">
+              <h1 className="text-darkViolet font-medium font-space text-smm tracking-widest absolute top-130 left-24 lg:top-96 lg:left-190">
                 We've added your card details
               </h1>
             </div>
             <div>
               <button
                 type="submit"
-                className="!bg-darkerViolet font-space font-normal text-base text-white w-76 h-10 py-2 px-4 rounded-md absolute top-110 left-185"
+                className="!bg-darkerViolet font-space font-normal text-base text-white w-76 h-10 py-2 px-4 rounded-md absolute top-140 left-13 lg:top-110 lg:left-185"
               >
                 Continue
               </button>
@@ -150,7 +150,6 @@ function CardDetails() {
                     ? errors
                     : {};
                 }}
-                // Review
                 onSubmit={(values, { setSubmitting }) => {
                   setShowDiv(true);
                   setSubmitting(false);
@@ -311,5 +310,3 @@ function CardDetails() {
 }
 
 export default CardDetails;
-
-// on click, renders the complete state,
