@@ -39,42 +39,39 @@ function CardDetails() {
           <div>
             <img
               src={CardFrontBg}
-              width={380}
-              className="z-10 absolute top-36 left-52 drop-shadow-2xl"
+              className="z-20 drop-shadow-2xl w-72 absolute top-30 left-6 lg:w-100 lg:absolute lg:top-36 lg:left-52"
             />
             <img
               src={CardLogo}
-              width={80}
-              className="z-10 absolute top-42 left-58 drop-shadow-2xl"
+              className="z-20 drop-shadow-2xl w-14 absolute top-35 left-12 lg:w-27 lg:top-42 lg:left-58"
             />
-            <div className="z-10 absolute top-66 left-58 bg-transparent text-white font-space text-xxl tracking-widest">
+            <div className="z-20 absolute top-46 left-12 bg-transparent text-white font-space text-x tracking-widest lg:top-66 lg:left-58 lg:text-xxl">
               {cardNumber}
             </div>
-            <div className="z-10 absolute top-84 left-58 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+            <div className="z-20 absolute top-62 left-12 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-58 lg:text-smm">
               {cardName}
             </div>
-            <div className="z-10 absolute top-84 left-130 bg-transparent uppercase text-white font-space text-smm tracking-widest">
-              {cardMonth}
+            <div className="z-20 absolute top-62 left-62 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-130 lg:text-smm">
+              {cardMonth}/
             </div>
-            <div className="z-10 absolute top-84 left-132 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+            <div className="z-20 absolute top-62 left-70 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-84 lg:left-132 lg:text-smm">
               {cardYear}
-            </div>
-            <div className="z-10 absolute top-84 left-131 bg-transparent uppercase text-white font-space text-smm tracking-widest">
-              /
             </div>
           </div>
           <div>
             <img
               src={CardBackBg}
-              width={380}
-              className="z-10 absolute top-96 left-72 drop-shadow-2xl"
+              className="z-10 drop-shadow-2xl w-72 absolute top-8 left-20 lg:w-100 lg:absolute lg:top-96 lg:left-72"
             />
-            <div className="z-10 absolute top-120 left-144 bg-transparent uppercase text-white font-space text-smm tracking-widest">
+            <div className="z-20 absolute top-26 left-84 bg-transparent uppercase text-white font-space text-s tracking-widest lg:top-122 lg:left-144 lg:text-smm">
               {cardCVC}
             </div>
           </div>
           <div>
-            <img src={MainBg} className="h-screen w-1/3 absolute z-0" />
+            <img
+              src={MainBg}
+              className="w-104 h-70 absolute z-0 lg:h-screen lg:w-1/3"
+            />
           </div>
         </div>
         {showDiv ? (
@@ -83,30 +80,30 @@ function CardDetails() {
               <img
                 src={IconComplete}
                 width={80}
-                className="absolute top-58 left-215"
+                className="absolute top-92 left-40 lg:top-58 lg:left-215"
               />
             </div>
             <div>
-              <h1 className="uppercase font-medium font-space text-xxl tracking-widest absolute top-88 left-200">
+              <h1 className="uppercase font-medium font-space text-xxl tracking-widest absolute top-120 left-29 lg:top-88 lg:left-200">
                 Thank you!
               </h1>
             </div>
             <div>
-              <h1 className="text-darkViolet font-medium font-space text-smm tracking-widest absolute top-96 left-190">
+              <h1 className="text-darkViolet font-medium font-space text-smm tracking-widest absolute top-130 left-24 lg:top-96 lg:left-190">
                 We've added your card details
               </h1>
             </div>
             <div>
               <button
                 type="submit"
-                className="!bg-darkerViolet font-space font-normal text-base text-white w-76 h-10 py-2 px-4 rounded-md absolute top-110 left-185"
+                className="!bg-darkerViolet font-space font-normal text-base text-white w-76 h-10 py-2 px-4 rounded-md absolute top-140 left-13 lg:top-110 lg:left-185"
               >
                 Continue
               </button>
             </div>
           </div>
         ) : (
-          <div className="border-none absolute top-58 right-80">
+          <div className="border-none absolute top-90 left-10 lg:top-58 lg:left-185">
             <div>
               <Formik
                 initialValues={{
@@ -153,7 +150,6 @@ function CardDetails() {
                     ? errors
                     : {};
                 }}
-                // Review
                 onSubmit={(values, { setSubmitting }) => {
                   setShowDiv(true);
                   setSubmitting(false);
@@ -314,5 +310,3 @@ function CardDetails() {
 }
 
 export default CardDetails;
-
-// on click, renders the complete state,
